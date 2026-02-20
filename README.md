@@ -2,6 +2,10 @@
 
 MCP server for [MediaChips](https://github.com/fupdec/mediachips) database. Provides CRUD tools to manage media, tags, playlists, marks, and settings via the Model Context Protocol.
 
+## Requirements
+
+- macOS (other platforms are not currently supported)
+
 ## Setup
 
 ```bash
