@@ -6,6 +6,7 @@ import {
   CallToolRequestSchema,
   ListToolsRequestSchema,
   Tool,
+  CallToolRequest,
 } from "@modelcontextprotocol/sdk/types.js";
 import Database from "better-sqlite3";
 import { existsSync } from "fs";
@@ -205,19 +206,24 @@ class MediachipsServer {
     ];
   }
 
-  private async handleToolCall(request: any) {
+  private async handleToolCall(request: CallToolRequest) {
     const { name, arguments: args } = request.params;
 
     try {
       switch (name) {
         case "create_media_item":
-          return await this.createMediaItem(args);
+          return await this.createMediaItem(args as unknown as MediaItem);
         case "read_media_items":
-          return await this.readMediaItems(args);
+          return await this.readMediaItems(args as {
+            id?: number;
+            type?: string;
+            limit?: number;
+            offset?: number;
+          });
         case "update_media_item":
-          return await this.updateMediaItem(args);
+          return await this.updateMediaItem(args as unknown as MediaItem & { id: number });
         case "delete_media_item":
-          return await this.deleteMediaItem(args);
+          return await this.deleteMediaItem(args as { id: number });
         default:
           throw new Error(`Unknown tool: ${name}`);
       }
@@ -286,7 +292,7 @@ class MediachipsServer {
     }
 
     let query = "SELECT * FROM media_items";
-    const params: any[] = [];
+    const params: (string | number)[] = [];
 
     if (type) {
       query += " WHERE type = ?";
@@ -320,7 +326,7 @@ class MediachipsServer {
     }
 
     const updates: string[] = [];
-    const params: any[] = [];
+    const params: (string | number | null)[] = [];
 
     if (title !== undefined) {
       updates.push("title = ?");

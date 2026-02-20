@@ -7,10 +7,11 @@
 
 import { spawn } from "child_process";
 import { resolve } from "path";
+import fs from "fs";
 
 const serverPath = resolve("./dist/index.js");
 
-function sendMessage(server: any, message: any) {
+function sendMessage(server, message) {
   const jsonMessage = JSON.stringify(message) + "\n";
   server.stdin.write(jsonMessage);
 }
@@ -24,17 +25,17 @@ function runTest() {
 
   let responseData = "";
 
-  server.stdout.on("data", (data: Buffer) => {
+  server.stdout.on("data", (data) => {
     const text = data.toString();
     responseData += text;
     console.log("Server stdout:", text);
   });
 
-  server.stderr.on("data", (data: Buffer) => {
+  server.stderr.on("data", (data) => {
     console.error("Server stderr:", data.toString());
   });
 
-  server.on("close", (code: number) => {
+  server.on("close", (code) => {
     console.log(`\nServer exited with code ${code}`);
   });
 
@@ -84,7 +85,6 @@ function runTest() {
     server.kill("SIGINT");
     
     setTimeout(() => {
-      const fs = require("fs");
       if (fs.existsSync("./test-db.sqlite")) {
         fs.unlinkSync("./test-db.sqlite");
         console.log("Test database cleaned up");
