@@ -1,0 +1,25 @@
+{
+  "name": "mcp-mediachips",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "start": "node index.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/rikuson/mcp-mediachips.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "type": "commonjs",
+  "bugs": {
+    "url": "https://github.com/rikuson/mcp-mediachips/issues"
+  },
+  "homepage": "https://github.com/rikuson/mcp-mediachips#readme",
+  "dependencies": {
+    "@modelcontextprotocol/sdk": "^1.26.0",
+    "better-sqlite3": "^12.6.2"
+  }
+}
