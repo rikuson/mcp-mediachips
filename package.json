@@ -1,0 +1,32 @@
+{
+  "name": "mcp-mediachips",
+  "version": "0.1.0",
+  "description": "MCP Server for CRUD operations on Mediachips SQLite database",
+  "type": "module",
+  "main": "dist/index.js",
+  "bin": {
+    "mcp-mediachips": "dist/index.js"
+  },
+  "scripts": {
+    "build": "tsc",
+    "prepare": "npm run build",
+    "watch": "tsc --watch"
+  },
+  "keywords": [
+    "mcp",
+    "mediachips",
+    "sqlite",
+    "crud"
+  ],
+  "author": "",
+  "license": "MIT",
+  "dependencies": {
+    "@modelcontextprotocol/sdk": "^1.0.4",
+    "better-sqlite3": "^11.8.1"
+  },
+  "devDependencies": {
+    "@types/better-sqlite3": "^7.6.12",
+    "@types/node": "^22.10.5",
+    "typescript": "^5.7.3"
+  }
+}
